@@ -6,7 +6,6 @@ import Board from "./components/Board";
 
 const Wrapper = styled.div`
   display: flex;
-  width: 100vh;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -15,10 +14,17 @@ const Wrapper = styled.div`
 
 const Boards = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   gap: 10px;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
 `;
 
 function App() {
@@ -27,20 +33,48 @@ function App() {
   //onDragEnd = 유저가 드래그를 끝낸 시점에 불려지는 함수
   const onDragEnd = (info: DropResult) => {
     const { destination, draggableId, source } = info;
+    if (!destination) return;
     if (destination?.droppableId === source.droppableId) {
       // 같은 보드에서 움직이는 경우
+      console.log(info);
       setToDos((allBoards) => {
         const boardCopy = [...allBoards[source.droppableId]]; // boardCopy -> 내가 누른 board 배열이 카피됨.
+
+        const taskObj = boardCopy[source.index];
+        console.log(boardCopy);
+        console.log(taskObj);
         //1) 처음 드래그 한 타겟을 배열에서 삭제
         boardCopy.splice(source.index, 1);
         //2) 내가 들어갈 자리에 추가
-        boardCopy.splice(destination?.index, 0, draggableId);
+        boardCopy.splice(destination?.index, 0, taskObj);
         return {
           ...allBoards,
           [source.droppableId]: boardCopy,
         };
       });
-      console.log(toDos);
+    }
+
+    if (destination.droppableId !== source.droppableId) {
+      // 다른 보드로 이동하는 경우
+
+      setToDos((allBoard) => {
+        // 클릭한 보드
+        const sourceBoard = [...allBoard[source.droppableId]];
+
+        const taskObj = sourceBoard[source.index];
+
+        // 드롭되는 보드
+        const destinationBoard = [...allBoard[destination.droppableId]];
+        // 움직임이 시작될때 배열에서 타겟 지워줌
+        sourceBoard.splice(source.index, 1);
+        // 드롭되는 보드의 배열에 넣어줌
+        destinationBoard.splice(destination?.index, 0, taskObj);
+        return {
+          ...allBoard,
+          [source.droppableId]: sourceBoard,
+          [destination.droppableId]: destinationBoard,
+        };
+      });
     }
   };
   /*
@@ -54,6 +88,11 @@ function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
         <Boards>
+          <Title>
+            Drag & Drop
+            <br />
+            ToDo-List
+          </Title>
           {Object.keys(toDos).map((boardId) => (
             <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />
           ))}
