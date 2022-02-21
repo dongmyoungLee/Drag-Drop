@@ -16,25 +16,30 @@
 
 ## 📦 Packages
 
-- [x] update...
+- [x] ES6
+- [x] TYPESCRIPT
+- [x] REACT
+- [x] REACT-QUERY
+- [x] REACT-BEAUTIFUL-DND
+- [x] REACT-HOOK-FORM
+- [x] STYLED-COMPONENTS
+- [x] RECOIL
 
 ## 📖 Theory
 
-- [x] update...
-
-## ⚙ Features
-
-### 🙎‍♂️ Users
-
-- [x] update...
-
-## 🚀 Deployment
-
-- [x] update...
+- [x] useForm
+- [x] useSetRecoilState
+- [x] useRecoilState
+- [x] useRecoilValue
+- [x] createGlobalStyle
 
 ## ⏳ More Todos
 
-- [x] update...
+- [ ] LocalStorage
+- [ ] Drag Delete
+- [ ] Todo Delete
+- [ ] Create Board
+- [ ] Change Board
 
 ## 🔗 Link
 
