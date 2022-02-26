@@ -13,7 +13,20 @@ const Wrapper = styled.div`
   min-height: 200px;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
+
+const DBtn = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #3f8cf2;
+  color: white;
+  cursor: pointer;
+`;
+
 const Title = styled.h2`
   text-align: center;
   font-weight: 600;
@@ -75,6 +88,16 @@ function Board({ toDos, boardId }: IBoardProps) {
     });
     setValue("toDo", "");
   };
+
+  const removeBoard = (id: string) => {
+    setToDos((allBoards) => {
+      const copyboard = { ...allBoards };
+      console.log(copyboard);
+      delete copyboard[id];
+      return copyboard;
+    });
+  };
+
   return (
     <Wrapper>
       <Title>{boardId}</Title>
@@ -83,17 +106,27 @@ function Board({ toDos, boardId }: IBoardProps) {
           {...register("toDo", { required: true })}
           type="text"
           placeholder={`Add task on ${boardId}`}
+          autoComplete="off"
         />
       </Form>
+
       <Droppable droppableId={boardId}>
         {(magic, info) => (
           //drop 받는역할은 Area
+
           <Area
             isDraggingFromThis={Boolean(info.draggingFromThisWith)}
             isDraggingOver={info.isDraggingOver}
             ref={magic.innerRef}
             {...magic.droppableProps}
           >
+            <DBtn
+              onClick={() =>
+                removeBoard(magic.droppableProps["data-rbd-droppable-id"])
+              }
+            >
+              X
+            </DBtn>
             {toDos.map((toDo, index) => (
               <DragabbleCard
                 key={toDo.id}

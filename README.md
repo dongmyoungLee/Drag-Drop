@@ -35,10 +35,10 @@
 
 ## ⏳ More Todos
 
-- [ ] LocalStorage
-- [ ] Drag Delete
-- [ ] Todo Delete
-- [ ] Create Board
+- [x] LocalStorage
+- [x] Todo Delete
+- [x] Create Board
+- [x] Delete Board
 - [ ] Change Board
 
 ## 🔗 Link

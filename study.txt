@@ -1,0 +1,11 @@
+- beautiful-dnd 라이브러리를 이용해봤다. 기본적인 이용방법은 DragDropContext -> droppable -> droggable 으로 이용하여야 하였다
+
+- droppable 은 어떤것을 드롭할 수 있는 영역 이고 그의 children 은 react 요소이면안되고 함수 이여야 한다. 이유는 props를 받기위해서이다. 또한 속성으로 droppableId 를 각자 다르게 넣어주고 포함하는 요소에 ref 속성을 준다. props로 받아온 데이터는 자식태그에 스프레드 오퍼레이터로 다 넣어준다.
+
+-droggable 은 드래그 할 수 있는 영역이며 droppable과 같은 방법으로 설정하되 받아온 props 자료에서 dragHandleProps가 마우스포인터를 가지며 드래그를 할 수 있는 주체가 된다.
+
+- onDragEnd 는 드래그가 끝난다음에 실행시켜줄 함수를 적는 속성이다.
+
+- recoil 라이브러리를 사용해서 atom을 만들었다. 그 안의 자료로 todo 의 기본 배열값을 만들어놓앗다.
+
+-
