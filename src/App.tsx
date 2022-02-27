@@ -131,7 +131,7 @@ function App() {
       <Wrapper>
         <Boards>
           <Title>
-            Drag & Drop
+            Drag & Drop!
             <br />
             ToDo-List
           </Title>
